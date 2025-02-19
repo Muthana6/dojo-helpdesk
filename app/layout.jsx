@@ -1,7 +1,6 @@
 import { Rubik } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/app/components/Navbar";
-import Head from "next/head";
+
 
 const rubik = Rubik({
     // variable: "--font-geist-sans",
@@ -19,7 +18,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
 
       <body className={rubik.className}>
-        <Navbar/>
         {children}
       </body>
     </html>
