@@ -27,6 +27,13 @@
       "body": "the gpu doesnt work very well",
       "priority": "high",
       "user_email": "mario@netninja.dev"
+    },
+    {
+      "id": "ad4",
+      "title": "Fix My Pc",
+      "body": "the gpu doesnt work very well",
+      "priority": "high",
+      "user_email": "mario@netninja.dev"
     }
   ]
 }
