@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {use} from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import Logo from './dojo-logo.png'
 
-function Navbar() {
+function Navbar({user}) {
     return (
         <nav>
             <Image src={Logo} alt={`dojo Helpdesk logo`}
@@ -12,6 +12,7 @@ function Navbar() {
             <Link href={`/`}>Dashboard</Link>
             <Link href={`/tickets`}>Tickets</Link>
             <Link href={`/tickets/create`}>Create Ticket</Link>
+            {user && <span>Hello, {user.email} </span>}
         </nav>
     );
 }
