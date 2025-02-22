@@ -7,7 +7,7 @@ export default async function DashboardLayout({ children }) {
     const {data} = await supabase.auth.getSession()
   return (
     <>
-        <Navbar user={data.session.user}/>
+        <Navbar user={data?.session?.user}/>
         {children}
     </>
   );

@@ -2,6 +2,7 @@ import React, {use} from 'react';
 import Link from "next/link";
 import Image from "next/image";
 import Logo from './dojo-logo.png'
+import LogoutButton from "@/app/components/LogoutButton";
 
 function Navbar({user}) {
     return (
@@ -11,8 +12,10 @@ function Navbar({user}) {
             <h1>Dojo Helpdesk</h1>
             <Link href={`/`}>Dashboard</Link>
             <Link href={`/tickets`}>Tickets</Link>
-            <Link href={`/tickets/create`}>Create Ticket</Link>
+            <Link href={`/tickets/create`} className={`mr-auto`}>Create Ticket</Link>
+
             {user && <span>Hello, {user.email} </span>}
+            <LogoutButton/>
         </nav>
     );
 }
