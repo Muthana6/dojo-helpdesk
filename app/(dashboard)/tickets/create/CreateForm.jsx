@@ -2,6 +2,7 @@
 
 import {useState} from "react";
 import {useRouter} from "next/navigation";
+import {error} from "next/dist/build/output/log";
 
 export function CreateForm() {
     const router = useRouter();
@@ -15,17 +16,22 @@ export function CreateForm() {
         event.preventDefault()
         setIsLoading(true)
 
-        const newTicket = { title, body, priority, user_email: 'mario@netninja.dev' }
+        const newTicket = { title, body, priority }
 
-        const res = await fetch('http://localhost:4000/tickets', {
+        const res = await fetch('http://localhost:3000/api/tickets', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify(newTicket)
         })
-
-        if (res.status === 201) {
+        const json= await res.json()
+        if(json.error) {
+            console.log(json.error.message)
+            setIsLoading(false)
+        }
+        if (json.data){
             router.refresh()
             router.push('/tickets')
+            setIsLoading(false)
         }
     }
 

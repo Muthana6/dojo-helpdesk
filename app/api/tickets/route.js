@@ -1,25 +1,24 @@
-import {NextResponse} from "next/server";
+import { NextResponse } from "next/server"
+import { cookies } from 'next/headers'
+import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
 
-// METHOD 2 works on the whole route
-export const dynamic = 'force-static'
-export async function GET(){
-    const res = await fetch(`http://localhost:4000/tickets`
-    //     METHOD 2 works locally on the route
-    //     {next: {revalidate: 0}}
-    )
-
-    const tickets = await res.json()
-    return NextResponse.json(tickets, {status: 200})
-}
-
-export async function POST(request){
+export async function POST(request) {
     const ticket = await request.json()
-    const res = await fetch('http://localhost:4000/tickets', {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(ticket)
-    })
 
-    const newTicket = await res.json()
-    return NextResponse.json(newTicket, {status: 201})
+    // get supabase instance
+    const supabase = await createRouteHandlerClient({ cookies })
+
+    // get current user session
+    const { data: { session } } = await supabase.auth.getSession()
+
+    // insert the data
+    const { data, error } = await supabase.from('Tickets')
+        .insert({
+            ...ticket,
+            user_email: session.user.email,
+        })
+        .select()
+        .single()
+
+    return NextResponse.json({ data, error })
 }
