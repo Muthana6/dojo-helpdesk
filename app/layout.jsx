@@ -1,6 +1,7 @@
 import { Rubik } from "next/font/google";
 import "./globals.css";
 
+export const dynamic = 'force-dynamic' // for building as we have too many dynamic functions
 
 const rubik = Rubik({
     // variable: "--font-geist-sans",
@@ -18,10 +19,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
       <html lang="en">
-
-      <body className={rubik.className}>
-      {children}
-      </body>
+          <body className={rubik.className}>
+          {children}
+          </body>
       </html>
   );
 }

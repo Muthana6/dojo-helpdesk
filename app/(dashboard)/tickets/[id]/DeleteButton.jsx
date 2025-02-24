@@ -23,6 +23,7 @@ export default function DeleteButton({id}) {
             router.push('/')
         }
     }
+
     return (
         <button
             onClick={handleClick}
